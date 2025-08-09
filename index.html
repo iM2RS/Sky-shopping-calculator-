@@ -73,8 +73,8 @@
             text-align: center;
         }
         #contact a {
-            color: #007bff; /* لون أزرق لرابط انستغرام */
-            text-decoration: underline; /* إضافة خط تحت الرابط */
+            color: #007bff;
+            text-decoration: underline;
         }
         #contact a:hover {
             text-decoration: none;
@@ -116,22 +116,8 @@
             const exchangeRate = 1380;
             let priceInIQD = priceInDollars * exchangeRate;
             
-            const denominations = [250, 500, 1000, 5000, 10000, 25000, 50000];
-            
-            let nearestDenomination = 0;
-            let minDifference = Infinity;
-            
-            for (let i = 0; i < denominations.length; i++) {
-                const currentDenomination = denominations[i];
-                const difference = Math.abs(priceInIQD - currentDenomination);
-                
-                if (difference < minDifference) {
-                    minDifference = difference;
-                    nearestDenomination = currentDenomination;
-                }
-            }
-            
-            const roundedPrice = nearestDenomination;
+            // تصحيح الخطأ: تقريب السعر إلى أقرب مضاعف لـ 250
+            const roundedPrice = Math.round(priceInIQD / 250) * 250;
             
             document.getElementById('result').innerHTML = 
                 `سعر منتجاتك هو <span style="color: #d9534f;">${roundedPrice.toLocaleString()}</span> دينار عراقي`;
