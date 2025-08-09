@@ -32,11 +32,10 @@
             font-size: 16px;
             font-weight: bold;
             color: red;
-            /* إضافة خط تحت النص */
             text-decoration: underline; 
         }
         .video-link-container a:hover {
-            text-decoration: none; /* إزالة الخط عند مرور الماوس */
+            text-decoration: none;
         }
         label, input, button {
             display: block;
@@ -74,11 +73,11 @@
             text-align: center;
         }
         #contact a {
-            color: #007bff;
-            text-decoration: none;
+            color: #007bff; /* لون أزرق لرابط انستغرام */
+            text-decoration: underline; /* إضافة خط تحت الرابط */
         }
         #contact a:hover {
-            text-decoration: underline;
+            text-decoration: none;
         }
     </style>
 </head>
@@ -88,7 +87,7 @@
 
     <div class="video-link-container">
         <a href="https://youtube.com/shorts/3SmJ48IYONM?si=VNrnRoZUDWzSfNqc" target="_blank">
-            شاهد فيديو تعليمي لطريقة التسوق وحساب الأسعار في شي ان
+            اضغط هنا لمشاهدة فيديو تعليمي لطريقة التسوق وحساب الاسعار في شي ان
         </a>
     </div>
 
@@ -102,9 +101,9 @@
     <div id="result"></div>
 
     <div id="contact">
-        بإمكانكم التواصل معنا على الصفحة في انستغرام لأي استفسار أو طلب: 
+        تواصل معنا على صفحة انستغرام لأي استفسار أو طلب: 
         <a href="https://www.instagram.com/sky1shooping?igsh=cWllNWtvYmI3aGh1" target="_blank">
-            https://www.instagram.com/sky1shooping?igsh=cWllNWtvYmI3aGh1
+            📸 insta : @sky1shooping
         </a>
     </div>
 </div>
@@ -115,10 +114,27 @@
         
         if (priceInDollars && priceInDollars > 0) {
             const exchangeRate = 1380;
-            const priceInIQD = priceInDollars * exchangeRate;
+            let priceInIQD = priceInDollars * exchangeRate;
+            
+            const denominations = [250, 500, 1000, 5000, 10000, 25000, 50000];
+            
+            let nearestDenomination = 0;
+            let minDifference = Infinity;
+            
+            for (let i = 0; i < denominations.length; i++) {
+                const currentDenomination = denominations[i];
+                const difference = Math.abs(priceInIQD - currentDenomination);
+                
+                if (difference < minDifference) {
+                    minDifference = difference;
+                    nearestDenomination = currentDenomination;
+                }
+            }
+            
+            const roundedPrice = nearestDenomination;
             
             document.getElementById('result').innerHTML = 
-                `سعر منتجاتك هو <span style="color: #d9534f;">${priceInIQD.toLocaleString()}</span> دينار عراقي`;
+                `سعر منتجاتك هو <span style="color: #d9534f;">${roundedPrice.toLocaleString()}</span> دينار عراقي`;
         } else {
             document.getElementById('result').innerHTML = 
                 '<span style="color: red;">الرجاء إدخال سعر صحيح.</span>';
