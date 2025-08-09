@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar">
-<head> 
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>حاسبة أسعار Shein</title>
@@ -110,17 +110,17 @@
 
 <script>
     function calculatePrice() {
-        const inputPrice = Number(document.getElementById('priceInput').value);
+        const priceInDollars = document.getElementById('priceInput').value;
         
-        if (inputPrice > 0) {
+        if (priceInDollars && priceInDollars > 0) {
             const exchangeRate = 1380;
-            const totalPrice = inputPrice * exchangeRate;
+            let priceInIQD = priceInDollars * exchangeRate;
             
-            // هذا السطر يضمن التقريب لأقرب 1000
-            const finalPrice = Math.round(totalPrice / 1000) * 1000;
+            // تصحيح الخطأ: تقريب السعر إلى أقرب مضاعف لـ 250
+            const roundedPrice = Math.round(priceInIQD / 250) * 250;
             
             document.getElementById('result').innerHTML = 
-                `سعر منتجاتك هو <span style="color: #d9534f;">${finalPrice.toLocaleString()}</span> دينار عراقي`;
+                `سعر منتجاتك هو <span style="color: #d9534f;">${roundedPrice.toLocaleString()}</span> دينار عراقي`;
         } else {
             document.getElementById('result').innerHTML = 
                 '<span style="color: red;">الرجاء إدخال سعر صحيح.</span>';
