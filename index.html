@@ -6,7 +6,7 @@
     <title>حاسبة أسعار Shein</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             direction: rtl;
             text-align: right;
             padding: 20px;
@@ -22,6 +22,20 @@
         }
         h1 {
             color: #333;
+            text-align: center;
+        }
+        .video-link-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .video-link-container a {
+            font-size: 16px;
+            font-weight: bold;
+            color: red;
+            text-decoration: none;
+        }
+        .video-link-container a:hover {
+            text-decoration: underline;
         }
         label, input, button {
             display: block;
@@ -56,6 +70,7 @@
             margin-top: 20px;
             font-size: 14px;
             color: #777;
+            text-align: center;
         }
         #contact a {
             color: #007bff;
@@ -69,6 +84,13 @@
 <body>
 
 <div class="container">
+
+    <div class="video-link-container">
+        <a href="https://youtube.com/shorts/3SmJ48IYONM?si=VNrnRoZUDWzSfNqc" target="_blank">
+            شاهد فيديو تعليمي لطريقة التسوق وحساب الأسعار في شي ان
+        </a>
+    </div>
+
     <h1>حاسبة أسعار Shein</h1>
 
     <label for="priceInput">أدخل السعر بالدولار بدون الكوبونات:</label>
@@ -88,22 +110,15 @@
 
 <script>
     function calculatePrice() {
-        // الحصول على قيمة السعر المدخل
         const priceInDollars = document.getElementById('priceInput').value;
         
-        // التحقق من أن القيمة ليست فارغة أو صفر
         if (priceInDollars && priceInDollars > 0) {
-            // سعر الصرف
             const exchangeRate = 1380;
-            
-            // حساب السعر بالدينار العراقي
             const priceInIQD = priceInDollars * exchangeRate;
             
-            // عرض النتيجة
             document.getElementById('result').innerHTML = 
                 `سعر منتجاتك هو <span style="color: #d9534f;">${priceInIQD.toLocaleString()}</span> دينار عراقي`;
         } else {
-            // إظهار رسالة خطأ إذا كان الإدخال غير صالح
             document.getElementById('result').innerHTML = 
                 '<span style="color: red;">الرجاء إدخال سعر صحيح.</span>';
         }
